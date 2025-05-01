@@ -241,3 +241,55 @@ footer {
 main {
     min-height: calc(100vh - 160px); /* Ajusta según altura de header y footer */
 }
+#clip-modal {  /* ¡Cambia el ID para que coincida con el nuevo modal! */
+    display: none;
+    position: fixed;
+    z-index: 101;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.9);
+}
+.movie-card img {
+    width: 100%; /* La imagen ocupa el 100% del ancho del contenedor .movie-card */
+    height: auto; /* La altura se ajusta automáticamente para mantener la relación de aspecto */
+    max-height: 400px; /* Opcional: Establece una altura máxima */
+    object-fit: cover; /* Opcional: Recorta o escala la imagen para que se ajuste al contenedor */
+    border-radius: 4px;
+}
+.hero {
+    height: 70vh; /* Ajusta la altura según necesites */
+    position: relative; /* Importante para posicionar los elementos dentro */
+    overflow: hidden; /* Para que la imagen no se desborde */
+    display: flex;
+    flex-direction: column; /* Apila el texto encima de la imagen */
+    justify-content: center; /* Centra el contenido verticalmente */
+    align-items: center; /* Centra el contenido horizontalmente */
+    text-align: center; /* Asegura que el texto esté centrado */
+}
+
+.hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Cubre todo el espacio sin deformar demasiado */
+    position: absolute; /* Coloca la imagen detrás del texto */
+    top: 0;
+    left: 0;
+    z-index: 1; /* Asegura que la imagen esté detrás */
+}
+
+.hero h1,
+.hero p {
+    color: white; /* Asegúrate de que el texto sea legible sobre la imagen */
+    position: relative; /* Permite ajustar el z-index si es necesario */
+    z-index: 2; /* Asegura que el texto esté encima de la imagen */
+    background-color: rgba(0, 0, 0, 0.5); /* Opcional: Fondo semitransparente para mejor legibilidad */
+    padding: 0.5rem; /* Opcional: Espacio alrededor del texto */
+    border-radius: 5px; /* Opcional: Bordes redondeados para el fondo */
+}
+
+.hero h1 {
+    font-size: 3rem; /* Ajusta el tamaño del título */
+    margin-bottom: 0.5rem;
+}
