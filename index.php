@@ -1,4 +1,15 @@
-<?php include 'includes/header.php'; ?>
+<?php
+include 'includes/config.php';
+session_start();
+
+if (!isset($_SESSION['user_id'])) {
+    header('Location: auth/login.php');
+    exit;
+}
+
+$mostrar_busqueda = true;
+include 'includes/header.php';
+?>
 
 <div class="hero">
     <h1>Bienvenido a Tecflix</h1>
@@ -12,19 +23,19 @@
         $stmt = $pdo->prepare("SELECT * FROM movies WHERE genre = ? LIMIT 5");
         $stmt->execute([$genre]);
         $movies = $stmt->fetchAll();
-        
+
         if (!empty($movies)) {
             echo '<section class="movie-section">';
             echo '<h2>' . ucfirst($genre) . '</h2>';
             echo '<div class="movie-row">';
-            
+
             foreach ($movies as $movie) {
                 echo '<div class="movie-card" data-trailer="' . htmlspecialchars($movie['trailer_url']) . '">';
                 echo '<img src="assets/images/' . htmlspecialchars($movie['thumbnail']) . '" alt="' . htmlspecialchars($movie['title']) . '">';
                 echo '<h3>' . htmlspecialchars($movie['title']) . '</h3>';
                 echo '</div>';
             }
-            
+
             echo '</div></section>';
         }
     }

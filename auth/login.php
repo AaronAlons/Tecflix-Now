@@ -1,12 +1,20 @@
 <?php
+include '../includes/config.php';
+session_start();
+
+if (isset($_SESSION['user_id'])) {
+    header('Location: ../index.php');
+    exit;
+}
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
-    
+
     $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ?");
     $stmt->execute([$username]);
     $user = $stmt->fetch();
-    
+
     if ($user && password_verify($password, $user['password'])) {
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['username'] = $user['username'];
@@ -16,16 +24,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $error = "Usuario o contraseña incorrectos";
     }
 }
+
+$mostrar_busqueda = false;
+include '../includes/header.php';
 ?>
 
-<?php include '../includes/header.php'; ?>
-
-<div class="auth-container">
-    <h2>Iniciar sesión en Tecflix</h2>
-    <?php if(isset($error)): ?>
-        <div class="alert alert-danger"><?php echo $error; ?></div>
-    <?php endif; ?>
-    <form method="POST">
+<main class="auth-page">
+    <div class="auth-container">
+        <h2>Iniciar sesión en Tecflix</h2>
+        <?php if(isset($error)): ?>
+            <div class="alert alert-danger"><?php echo $error; ?></div>
+        <?php endif; ?>
+        <form method="POST">
         <div class="form-group">
             <label for="username">Usuario</label>
             <input type="text" id="username" name="username" required>
@@ -35,8 +45,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <input type="password" id="password" name="password" required>
         </div>
         <button type="submit" class="btn btn-primary">Iniciar sesión</button>
-    </form>
-    <p>¿No tienes una cuenta? <a href="register.php">Regístrate aquí</a></p>
-</div>
+        </form>
+        <p>¿No tienes una cuenta? <a href="register.php">Regístrate aquí</a></p>
+    </div>
+</main>
 
 <?php include '../includes/footer.php'; ?>

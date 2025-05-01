@@ -9,6 +9,6 @@
             </div>
         </div>
     </footer>
-    <script src="/assets/js/main.js"></script>
+    <script src="/Tecflix-Now/assets/js/main.js"></script>
 </body>
 </html>

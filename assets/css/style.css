@@ -216,3 +216,28 @@ footer {
 .footer-links a:hover {
     color: #fff;
 }
+
+/* Ajustes específicos para páginas de autenticación */
+.auth-page {
+    padding-top: 80px; /* Igual a la altura del header */
+    min-height: calc(100vh - 80px); /* Solo resta el header (footer se maneja aparte) */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #141414;
+}
+
+.auth-container {
+    max-width: 400px;
+    width: 90%;
+    margin: 20px auto; /* Reducido de 100px a 20px */
+    padding: 2rem;
+    background-color: rgba(0,0,0,0.8);
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(229, 9, 20, 0.3);
+}
+
+/* Asegura que el main tenga mínimo el alto de la pantalla */
+main {
+    min-height: calc(100vh - 160px); /* Ajusta según altura de header y footer */
+}
