@@ -1,35 +1,28 @@
 <?php
 session_start();
+include 'includes/config.php';
 
 if (!isset($_SESSION['user_id'])) {
     header('Location: auth/login.php');
     exit;
 }
 
-//  ¡NUEVO!  Verificar si se ha seleccionado un perfil
 if (!isset($_SESSION['profile_id'])) {
-    header('Location: profile.php');  // Redirigir a la página de perfiles
+    header('Location: profile.php');
     exit;
 }
 
 $mostrar_busqueda = true;
 include 'includes/header.php';
 
-//  ¡NUEVO!  Obtener el nombre del perfil para mostrar un saludo personalizado
-if (isset($_SESSION['profiles'][$_SESSION['user_id']])) {
-    $profiles = $_SESSION['profiles'][$_SESSION['user_id']];
-    $current_profile = null;
-    foreach ($profiles as $profile) {
-        if ($profile['id'] == $_SESSION['profile_id']) {
-            $current_profile = $profile;
-            break;
-        }
-    }
-    if ($current_profile) {
-        echo "<div class='welcome-message'>Bienvenido, " . htmlspecialchars($current_profile['name']) . "!</div>";
-    }
-}
+//  Obtener el nombre del perfil desde la base de datos
+$stmt = $pdo->prepare("SELECT profile_name FROM profiles WHERE id = ?");
+$stmt->execute([$_SESSION['profile_id']]);
+$profile = $stmt->fetch();
 
+if ($profile) {
+    echo "<div class='welcome-message'>Bienvenido, " . htmlspecialchars($profile['profile_name']) . "!</div>";
+}
 
 // Datos de las películas (¡hardcoded! - ¡AJUSTA ESTO!)
 $movies_by_genre = [
