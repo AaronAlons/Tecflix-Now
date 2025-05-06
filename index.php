@@ -6,8 +6,30 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
+//  ¡NUEVO!  Verificar si se ha seleccionado un perfil
+if (!isset($_SESSION['profile_id'])) {
+    header('Location: profile.php');  // Redirigir a la página de perfiles
+    exit;
+}
+
 $mostrar_busqueda = true;
 include 'includes/header.php';
+
+//  ¡NUEVO!  Obtener el nombre del perfil para mostrar un saludo personalizado
+if (isset($_SESSION['profiles'][$_SESSION['user_id']])) {
+    $profiles = $_SESSION['profiles'][$_SESSION['user_id']];
+    $current_profile = null;
+    foreach ($profiles as $profile) {
+        if ($profile['id'] == $_SESSION['profile_id']) {
+            $current_profile = $profile;
+            break;
+        }
+    }
+    if ($current_profile) {
+        echo "<div class='welcome-message'>Bienvenido, " . htmlspecialchars($current_profile['name']) . "!</div>";
+    }
+}
+
 
 // Datos de las películas (¡hardcoded! - ¡AJUSTA ESTO!)
 $movies_by_genre = [

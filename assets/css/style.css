@@ -293,3 +293,41 @@ main {
     font-size: 3rem; /* Ajusta el tamaño del título */
     margin-bottom: 0.5rem;
 }
+
+ /* Estilos para la animación de la "N" */
+ #loading-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.netflix-n {
+    color: #e50914;
+    font-size: 5rem;
+    font-weight: bold;
+    opacity: 0;
+    animation: appear 0.5s forwards, disappear 0.5s forwards 2s;
+}
+
+@keyframes appear {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes disappear {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+/* Estilo para el contenedor del mensaje de error (¡IMPORTANTE!) */
+#error-message-container {
+    margin-bottom: 1rem;
+    color: #e50914; /* Color rojo para el error */
+}
