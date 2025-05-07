@@ -2,9 +2,20 @@
 include '../includes/config.php';
 session_start();
 
+// Activar la visualización de errores
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 if (isset($_SESSION['user_id'])) {
-    header('Location: ../index.php');
-    exit;
+    // Verificar si el usuario ya seleccionó un perfil
+    if (isset($_SESSION['profile_id'])) {
+        header('Location: ../index.php');
+        exit;
+    } else {
+         header('Location: ../profile.php');
+         exit;
+    }
 }
 
 $mostrar_busqueda = false;
@@ -63,15 +74,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($user && password_verify($password, $user['password'])) {
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['username'] = $user['username'];
-        header('Location: ../index.php');
-        exit;
+
+        // Verificar si el usuario ya seleccionó un perfil
+        if (isset($_SESSION['profile_id'])) {
+            header('Location: ../index.php');
+            exit;
+        } else {
+            header('Location: ../profile.php');
+            exit;
+        }
+        
     } else {
         $error = "Usuario o contraseña incorrectos";
-        // Mostrar el mensaje de error usando JavaScript (¡CRUCIAL!)
         echo '<script>
                 document.getElementById("error-message-container").innerHTML = \'<div class="alert alert-danger">' . htmlspecialchars($error) . '</div>\';
                 document.getElementById("loading-animation").style.display = "none";
-              </script>';
+            </script>';
     }
 }
 
