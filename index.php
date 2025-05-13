@@ -36,19 +36,19 @@ $movies_by_genre = [
         // ... más películas de terror
     ],
     'Familiar' => [
-        ['title' => 'Patos', 'thumbnail' => 'thumbnails/patos.jpg', 'clip_url' => 'assets/clips/patos.mp4'],
+        ['title' => 'Patos', 'thumbnail' => 'thumbnails/patos.webp', 'clip_url' => 'assets/clips/patos.mp4'],
         ['title' => 'Bob esponja', 'thumbnail' => 'thumbnails/bobesponja.webp', 'clip_url' => 'assets/clips/bob.mp4'],
-        ['title' => 'La familia Mitchell...', 'thumbnail' => 'thumbnails/maquinas.jpg', 'clip_url' => 'assets/clips/La familia.mp4'],
-        ['title' => 'La vida secreta de tus mascotas', 'thumbnail' => 'thumbnails/pet.webp', 'clip_url' => 'assets/clips/mascotas.mp4'],
-        ['title' => 'La vida secreta de tus mascotas 2', 'thumbnail' => 'thumbnails/pet2.jpg', 'clip_url' => 'assets/clips/mascotas 2.mp4'],
+        ['title' => 'La familia Mitchell vs. las máquinas', 'thumbnail' => 'thumbnails/maquinas.jpg', 'clip_url' => 'assets/clips/La familia.mp4'],
+        ['title' => 'LA VIDA SECRETA DE TUS MASCOTAS', 'thumbnail' => 'thumbnails/pet.webp', 'clip_url' => 'assets/clips/mascotas.mp4'],
+        ['title' => 'LA VIDA SECRETA DE TUS MASCOTAS 2', 'thumbnail' => 'thumbnails/pet2.jpg', 'clip_url' => 'assets/clips/mascotas 2.mp4'],
         // ... más películas de terror
     ],
     'Fantasia' => [
-        ['title' => 'Animales fantasticos 3', 'thumbnail' => 'thumbnails/AnimalesS.webp', 'clip_url' => 'assets/clips/animales2.mp4'],
-        ['title' => 'Animales fantasticos', 'thumbnail' => 'thumbnails/Animales.jpg', 'clip_url' => 'assets/clips/animales.mp4'],
-        ['title' => 'Harry Potter y la piedra filosofal', 'thumbnail' => 'thumbnails/HP piedra filosofal.webp', 'clip_url' => 'assets/clips/HPfilosofal.mp4'],
-        ['title' => 'Harry Potter y la camara secreta', 'thumbnail' => 'thumbnails/HP y la camara secreta.webp', 'clip_url' => 'assets/clips/HPsecreta.mp4'],
-        ['title' => 'Harry Potter y la orden del fenix', 'thumbnail' => 'thumbnails/HP y la orden del fenix.webp', 'clip_url' => 'assets/clips/HPfenix.mp4'],
+        ['title' => 'Animales fantasticos y donde...', 'thumbnail' => 'thumbnails/AnimalesS.jpg', 'clip_url' => 'assets/clips/animales2.mp4'],
+        ['title' => 'Animales fantasticos y donde...', 'thumbnail' => 'thumbnails/Animales.jpg', 'clip_url' => 'assets/clips/animales.mp4'],
+        ['title' => 'Harry Potter y la piedra...', 'thumbnail' => 'thumbnails/HP piedra filosofal.webp', 'clip_url' => 'assets/clips/HPfilosofal.mp4'],
+        ['title' => 'Harry Potter y la camara de los secretos', 'thumbnail' => 'thumbnails/HP y la camara secreta.webp', 'clip_url' => 'assets/clips/HPsecreta.mp4'],
+        ['title' => 'Harry Potter y orden del fenix', 'thumbnail' => 'thumbnails/HP y la orden del fenix.webp', 'clip_url' => 'assets/clips/HPfenix.mp4'],
         // ... más películas de terror
     ],
     // ... más géneros
@@ -114,7 +114,7 @@ $all_movies = getAllMovies($movies_by_genre);
     .carousel-container {
         margin: 2rem 0;
         padding: 0 2rem;
-        position: relative; /* Asegura que las flechas se posicionen relativamente a este contenedor */
+        position: relative;
     }
 
     .carousel-container h2 {
@@ -126,7 +126,13 @@ $all_movies = getAllMovies($movies_by_genre);
         overflow-x: auto;
         gap: 1rem;
         padding: 1rem 0;
-        scroll-behavior: smooth; /* Para el scroll suave */
+        scroll-behavior: smooth;
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    }
+
+    .carousel::-webkit-scrollbar {
+        display: none;  /* Chrome, Safari and Opera */
     }
 
     .carousel-item {
@@ -156,23 +162,23 @@ $all_movies = getAllMovies($movies_by_genre);
 
     /* Estilos para las flechas */
     .carousel-arrow {
-        position: absolute; /* Posicionamiento absoluto dentro de .carousel-container */
+        position: absolute;
         top: 50%;
         transform: translateY(-50%);
         font-size: 2rem;
         color: white;
         cursor: pointer;
-        user-select: none; /* Evita la selección de texto al hacer clic en las flechas */
-        background-color: rgba(0, 0, 0, 0.7); /* Fondo semi-transparente para las flechas */
-        border-radius: 50%; /* Hace las flechas circulares */
-        width: 2.5rem; /* Ancho de las flechas */
-        height: 2.5rem; /* Alto de las flechas */
+        user-select: none;
+        background-color: rgba(0, 0, 0, 0.7);
+        border-radius: 50%;
+        width: 2.5rem;
+        height: 2.5rem;
         display: flex;
-        align-items: center; /* Centra el icono verticalmente */
-        justify-content: center; /* Centra el icono horizontalmente */
+        align-items: center;
+        justify-content: center;
         opacity: 0.7;
         transition: opacity 0.3s;
-        z-index: 10; /* Asegura que las flechas estén por encima del carrusel */
+        z-index: 10;
     }
 
     .carousel-arrow:hover {
@@ -187,27 +193,14 @@ $all_movies = getAllMovies($movies_by_genre);
         right: 0.5rem;
     }
 
-    /* (El resto del CSS se mantiene igual) */
-    .hero {
-        height: 70vh;
-        background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('../images/hero-bg.jpg');
-        background-size: cover;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        padding-top: 80px;
-    }
-
-    .hero h1 {
-        font-size: 3rem;
-        margin-bottom: 1rem;
+    /* Estilos de las categorías */
+    .categories {
+        margin: 2rem 0;
+        padding: 0 2rem;
     }
 
     .movie-section {
-        margin: 2rem 0;
-        padding: 0 2rem;
+        margin-bottom: 2rem;
     }
 
     .movie-section h2 {
@@ -219,12 +212,19 @@ $all_movies = getAllMovies($movies_by_genre);
         overflow-x: auto;
         gap: 1rem;
         padding: 1rem 0;
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    }
+
+    .movie-row::-webkit-scrollbar {
+        display: none;  /* Chrome, Safari and Opera */
     }
 
     .movie-card {
         min-width: 200px;
         transition: transform 0.3s;
         cursor: pointer;
+        text-align: center;
     }
 
     .movie-card:hover {
@@ -234,6 +234,15 @@ $all_movies = getAllMovies($movies_by_genre);
     .movie-card img {
         width: 100%;
         border-radius: 4px;
+        margin-bottom: 0.5rem;
+    }
+
+    .movie-card h3 {
+        font-size: 1rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 100%;
     }
 
     /* Modal del tráiler */
@@ -245,7 +254,7 @@ $all_movies = getAllMovies($movies_by_genre);
         top: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0,0,0,0.9);
+        background-color: rgba(0, 0, 0, 0.9);
     }
 
     .modal-content {
@@ -320,14 +329,13 @@ $all_movies = getAllMovies($movies_by_genre);
         const carousel = document.querySelector('.carousel');
         const arrowLeft = document.querySelector('.carousel-arrow.left');
         const arrowRight = document.querySelector('.carousel-arrow.right');
-        const itemWidth = 210; // Ancho aproximado de cada elemento (ajusta si es necesario)
-
+        const itemWidth = 210;
         arrowLeft.addEventListener('click', () => {
-            carousel.scrollLeft -= itemWidth * 2; // Desplaza dos elementos a la vez (ajusta según necesites)
+            carousel.scrollLeft -= itemWidth * 2;
         });
 
         arrowRight.addEventListener('click', () => {
-            carousel.scrollLeft += itemWidth * 2; // Desplaza dos elementos a la vez
+            carousel.scrollLeft += itemWidth * 2;
         });
     });
 </script>
